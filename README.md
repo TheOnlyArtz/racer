@@ -1,19 +1,5 @@
 # racer
 
-TODO: Write a description here
-
-## Installation
-
-TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
-
 ## Contributing
 
 1. Fork it (<https://github.com/your-github-user/racer/fork>)
@@ -24,4 +10,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [theonlyartz](https://github.com/your-github-user) - creator and maintainer
+- [theonlyartz](https://github.com/theonlyartz) - creator and maintainer
