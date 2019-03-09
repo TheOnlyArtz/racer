@@ -8,7 +8,7 @@ class Player
   getter wins
 
   def initialize(@properties : Hash(String, Int32 | String | Float64))
-      @name = properties["id"]
+      @id = properties["id"]
       @avgWPM = properties["avgWPM"]
       @wins = properties["wins"]
   end
