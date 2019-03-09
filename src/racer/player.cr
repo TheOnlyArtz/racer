@@ -7,7 +7,7 @@ class Player
   getter avgWPM
   getter wins
 
-  def initialize(@properties : Hash(String, Int32 | String | Float64))
+  def initialize(@ws_manager : WS_manager, properties : Hash(String, Int32 | String | Float64))
       @id = properties["id"]
       @avgWPM = properties["avgWPM"]
       @wins = properties["wins"]

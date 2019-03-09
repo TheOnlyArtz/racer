@@ -1,6 +1,6 @@
 class Room
   getter members
 
-  def initialize(@members : Hash(String, Player))
+  def initialize(@ws_manager : WS_manager, @members : Hash(String, Player))
   end
 end
