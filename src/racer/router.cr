@@ -12,12 +12,19 @@ class Router
   end
 
   # POST routes
-  def set_post
+  def set_posts
     post "/create_room" do |ctx|
       if body = ctx.request.body
          json = Hash(String, String).from_json body
          if json.has_key?("owner_id")
-           room = Room.new
+           
+           # Essentially this payload would exist inside the request body
+           # This is for the sake of testing
+           players_playload = {
+             json["owner_id"] => Player.new(self.@ws_manager, json["owner_id"], 0, 0)
+           }
+
+           room = Room.new(self.@ws_manager, players_playload)
          end
       end
     end
