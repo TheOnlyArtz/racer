@@ -6,5 +6,6 @@ router = Router.new global_ws_manager
 
 router.set_gets
 router.set_posts
+router.set_sockets
 
 Kemal.run
