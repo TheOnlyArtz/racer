@@ -12,7 +12,6 @@ class Router
 
     get "/room/:id" do |ctx|
       room_id = ctx.params.url["id"]
-      puts "From GET => #{room_id}"
       if @ws_manager.rooms.has_key?(room_id)
         render "src/views/room.ecr"
       else
@@ -46,10 +45,12 @@ class Router
       payload_new_player = {"op" => "players_amount", "data" => {"amount" => curr_players_in_room.size + 1}}
 
       if @ws_manager.rooms.has_key?(room_id)
+        # Get the new client to the global connections list
         @ws_manager.@connections << socket
-
+        # Get the new client to the room's connections list
         curr_players_in_room << socket
 
+        # Broadcast new player amount live!
         Router::Helper.broadcast payload_new_player, curr_players_in_room
 
       else
@@ -57,11 +58,15 @@ class Router
       end
 
       socket.on_close do
+        # Delete socket from room and global list
         @ws_manager.@connections.delete socket
         curr_players_in_room.delete socket
+
+        # If the room is empty delete it
         if @ws_manager.@connections.size.zero?
           @ws_manager.@rooms.delete room_id
         else
+          # Broadcast new player count
           payload_lose_player = {"op" => "players_amount", "data" => {"amount" => curr_players_in_room.size }}
           # Update player amount live!
           Router::Helper.broadcast payload_lose_player, curr_players_in_room
