@@ -17,7 +17,8 @@ async function create_room() {
 }
 
 function connect_to_ws() {
-  let a = location.href.split("http://localhost:3000/room/");
+  let a = location.href.split(`http://${location.host}/room/`);
+  let websocket_connection = new WebSocket(`ws://${location.host}/room/${a[1]}`);
 
-  websocket_connection = new WebSocket(`ws://${location.host}/room/${a[1]}`);
+  return websocket_connection;
 }
