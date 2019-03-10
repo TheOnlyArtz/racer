@@ -12,8 +12,9 @@ class WS_manager
   getter global_players
 
   def initialize()
-    @rooms = {} of String => Player
+    @rooms = {} of String => Room
     @global_players = {} of String => Player
+    @connections = [] of HTTP::WebSocket
   end
 
   assign(assign_room, key, rooms, value)
