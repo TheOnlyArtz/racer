@@ -9,13 +9,26 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="/css/index.css">
 
+  <script type="text/javascript">
+  let ws = connect_to_ws();
+  // console.log(ws)
+  ws.onmessage = r => {
+    let {op, data: inData} = JSON.parse(r.data)
+    console.log("aaaa")
+    switch (op) {
+      case "players_amount":
+      let connected_players_p = document.getElementById("connected_players_p")
+      connected_players_p.innerHTML = `This room has ${inData.amount} player(s) connected!`;
+      break;
+    }
+  };
+  </script>
+
   <body>
     <header>
-      <div>
-        <h2 class="center-align">Welcome to room => <%= room_id %></h2>
-        <script type="text/javascript">
-          connect_to_ws();
-        </script>
+      <div class="center-align">
+        <h3>Welcome to room => <%= room_id %></h3>
+        <p id="connected_players_p">This room has <%= @ws_manager.@rooms[room_id].@members.size %> player(s) connected!</p>
       </div>
     </header>
 
